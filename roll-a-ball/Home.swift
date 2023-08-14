@@ -8,40 +8,28 @@
 import SwiftUI
 import RealityKit
 import ARKit
+import os.log
 
 struct HomeView: View {
-    @ObservedObject var conn4VM = ConnnectFourViewModel()
-    @State var isActive = false
-    @State var isHost = false
+    @StateObject var rpsSession: MultipeerConn
     var body: some View {
         NavigationStack{
-            if isActive{
-                HostRoom().environmentObject(conn4VM)
-            }
-            else{
-                VStack{
-                    Spacer()
-                    VStack {
-                        Spacer()
-                        Button("Host") {
-                            conn4VM.host()
-                            self.isActive = true
-                            self.isHost = true
-                        }
-                        .font(.largeTitle)
-                        Spacer()
-                        Button("Join") {
-                            conn4VM.join()
-                            self.isActive = true
-                        }
-                        .font(.largeTitle)
-                        Spacer()
-                    }
-                    Spacer()
+            VStack{
+                NavigationLink(destination: PeerRoom(rpsSession: rpsSession)){
+                    Text("Host")
                 }
-                .padding()
+                .simultaneousGesture(TapGesture().onEnded{
+                    rpsSession.host()
+                })
+                NavigationLink(destination: PeerRoom(rpsSession: rpsSession)){
+                    Text("Join")
+                }
+                .simultaneousGesture(TapGesture().onEnded{
+                    rpsSession.join()
+                })
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

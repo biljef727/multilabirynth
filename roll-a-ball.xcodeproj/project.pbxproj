@@ -8,13 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		21185D792A77A7E8005840DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21185D782A77A7E8005840DA /* AppDelegate.swift */; };
-		21185D7B2A77A7E8005840DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21185D7A2A77A7E8005840DA /* ContentView.swift */; };
-		21185D7D2A77A7E8005840DA /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 21185D7C2A77A7E8005840DA /* Experience.rcproject */; };
-		21185D7F2A77A7E9005840DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21185D7E2A77A7E9005840DA /* Assets.xcassets */; };
 		21185D822A77A7E9005840DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21185D812A77A7E9005840DA /* Preview Assets.xcassets */; };
 		21185D8F2A7CDD9C005840DA /* MultipeerSession in Frameworks */ = {isa = PBXBuildFile; productRef = 21185D8E2A7CDD9C005840DA /* MultipeerSession */; };
 		21185D952A7CE994005840DA /* ConnectFourViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21185D942A7CE994005840DA /* ConnectFourViewModel.swift */; };
 		21185D972A7CEFAD005840DA /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21185D962A7CEFAD005840DA /* Home.swift */; };
+		2125E6382A83A9ED000040A5 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6372A83A9ED000040A5 /* Experience.rcproject */; };
+		2125E6392A83AA2F000040A5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21185D7A2A77A7E8005840DA /* ContentView.swift */; };
+		2125E63B2A83AA6A000040A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2125E63A2A83AA6A000040A5 /* Assets.xcassets */; };
+		2125E63D2A84C96B000040A5 /* Ball.reality in Resources */ = {isa = PBXBuildFile; fileRef = 2125E63C2A84C96B000040A5 /* Ball.reality */; };
+		2125E6402A84CEAE000040A5 /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = 2125E63F2A84CEAE000040A5 /* FocusEntity */; };
+		2125E6422A84D7F4000040A5 /* MultipeerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6412A84D7F4000040A5 /* MultipeerHandler.swift */; };
+		2125E6442A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6432A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift */; };
+		2125E6462A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6452A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift */; };
+		2125E6482A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6472A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift */; };
+		2125E64A2A84DF20000040A5 /* PairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6492A84DF20000040A5 /* PairView.swift */; };
+		2125E64C2A84DF63000040A5 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E64B2A84DF63000040A5 /* GameView.swift */; };
+		2125E64F2A84F056000040A5 /* PeerRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E64E2A84F056000040A5 /* PeerRoom.swift */; };
 		218FEB612A80D2A600D078FA /* HostRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218FEB602A80D2A600D078FA /* HostRoom.swift */; };
 /* End PBXBuildFile section */
 
@@ -22,11 +31,19 @@
 		21185D752A77A7E8005840DA /* roll-a-ball.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "roll-a-ball.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		21185D782A77A7E8005840DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21185D7A2A77A7E8005840DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		21185D7C2A77A7E8005840DA /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
-		21185D7E2A77A7E9005840DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21185D812A77A7E9005840DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		21185D942A7CE994005840DA /* ConnectFourViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourViewModel.swift; sourceTree = "<group>"; };
 		21185D962A7CEFAD005840DA /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		2125E6372A83A9ED000040A5 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
+		2125E63A2A83AA6A000040A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2125E63C2A84C96B000040A5 /* Ball.reality */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ball.reality; sourceTree = "<group>"; };
+		2125E6412A84D7F4000040A5 /* MultipeerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerHandler.swift; sourceTree = "<group>"; };
+		2125E6432A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultipeerHandler+MCSessionDelegate.swift"; sourceTree = "<group>"; };
+		2125E6452A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift; sourceTree = "<group>"; };
+		2125E6472A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerHandlerMCNearbyServiceHandlerDelegate.swift; sourceTree = "<group>"; };
+		2125E6492A84DF20000040A5 /* PairView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairView.swift; sourceTree = "<group>"; };
+		2125E64B2A84DF63000040A5 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		2125E64E2A84F056000040A5 /* PeerRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRoom.swift; sourceTree = "<group>"; };
 		218FEB602A80D2A600D078FA /* HostRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRoom.swift; sourceTree = "<group>"; };
 		218FEB622A80F2B400D078FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -36,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2125E6402A84CEAE000040A5 /* FocusEntity in Frameworks */,
 				21185D8F2A7CDD9C005840DA /* MultipeerSession in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,13 +82,18 @@
 			children = (
 				218FEB622A80F2B400D078FA /* Info.plist */,
 				21185D782A77A7E8005840DA /* AppDelegate.swift */,
-				21185D942A7CE994005840DA /* ConnectFourViewModel.swift */,
+				2125E6412A84D7F4000040A5 /* MultipeerHandler.swift */,
+				2125E6432A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift */,
+				2125E6452A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift */,
+				2125E6472A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift */,
 				21185D962A7CEFAD005840DA /* Home.swift */,
-				218FEB602A80D2A600D078FA /* HostRoom.swift */,
+				2125E64E2A84F056000040A5 /* PeerRoom.swift */,
 				21185D7A2A77A7E8005840DA /* ContentView.swift */,
-				21185D7C2A77A7E8005840DA /* Experience.rcproject */,
-				21185D7E2A77A7E9005840DA /* Assets.xcassets */,
+				2125E64D2A84E4D0000040A5 /* NoUsed */,
+				2125E63C2A84C96B000040A5 /* Ball.reality */,
+				2125E6372A83A9ED000040A5 /* Experience.rcproject */,
 				21185D802A77A7E9005840DA /* Preview Content */,
+				2125E63A2A83AA6A000040A5 /* Assets.xcassets */,
 			);
 			path = "roll-a-ball";
 			sourceTree = "<group>";
@@ -81,6 +104,17 @@
 				21185D812A77A7E9005840DA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2125E64D2A84E4D0000040A5 /* NoUsed */ = {
+			isa = PBXGroup;
+			children = (
+				218FEB602A80D2A600D078FA /* HostRoom.swift */,
+				21185D942A7CE994005840DA /* ConnectFourViewModel.swift */,
+				2125E6492A84DF20000040A5 /* PairView.swift */,
+				2125E64B2A84DF63000040A5 /* GameView.swift */,
+			);
+			path = NoUsed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -101,6 +135,7 @@
 			name = "roll-a-ball";
 			packageProductDependencies = (
 				21185D8E2A7CDD9C005840DA /* MultipeerSession */,
+				2125E63F2A84CEAE000040A5 /* FocusEntity */,
 			);
 			productName = "roll-a-ball";
 			productReference = 21185D752A77A7E8005840DA /* roll-a-ball.app */;
@@ -132,6 +167,7 @@
 			mainGroup = 21185D6C2A77A7E8005840DA;
 			packageReferences = (
 				21185D8D2A7CDD9C005840DA /* XCRemoteSwiftPackageReference "multipeer-session" */,
+				2125E63E2A84CEAE000040A5 /* XCRemoteSwiftPackageReference "FocusEntity" */,
 			);
 			productRefGroup = 21185D762A77A7E8005840DA /* Products */;
 			projectDirPath = "";
@@ -147,8 +183,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2125E63B2A83AA6A000040A5 /* Assets.xcassets in Resources */,
 				21185D822A77A7E9005840DA /* Preview Assets.xcassets in Resources */,
-				21185D7F2A77A7E9005840DA /* Assets.xcassets in Resources */,
+				2125E63D2A84C96B000040A5 /* Ball.reality in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,11 +196,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2125E6392A83AA2F000040A5 /* ContentView.swift in Sources */,
 				218FEB612A80D2A600D078FA /* HostRoom.swift in Sources */,
-				21185D7B2A77A7E8005840DA /* ContentView.swift in Sources */,
+				2125E6442A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift in Sources */,
+				2125E6382A83A9ED000040A5 /* Experience.rcproject in Sources */,
+				2125E64F2A84F056000040A5 /* PeerRoom.swift in Sources */,
 				21185D792A77A7E8005840DA /* AppDelegate.swift in Sources */,
+				2125E6462A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift in Sources */,
+				2125E64A2A84DF20000040A5 /* PairView.swift in Sources */,
 				21185D952A7CE994005840DA /* ConnectFourViewModel.swift in Sources */,
-				21185D7D2A77A7E8005840DA /* Experience.rcproject in Sources */,
+				2125E6482A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift in Sources */,
+				2125E6422A84D7F4000040A5 /* MultipeerHandler.swift in Sources */,
+				2125E64C2A84DF63000040A5 /* GameView.swift in Sources */,
 				21185D972A7CEFAD005840DA /* Home.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,8 +341,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "roll-a-ball/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_NSCameraUsageDescription = po;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "roll-a-ball";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -330,8 +374,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "roll-a-ball/Info.plist";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "$(PRODUCT_NAME)";
+				INFOPLIST_KEY_NSCameraUsageDescription = po;
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "roll-a-ball";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
@@ -383,6 +427,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		2125E63E2A84CEAE000040A5 /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/FocusEntity.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -390,6 +442,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 21185D8D2A7CDD9C005840DA /* XCRemoteSwiftPackageReference "multipeer-session" */;
 			productName = MultipeerSession;
+		};
+		2125E63F2A84CEAE000040A5 /* FocusEntity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2125E63E2A84CEAE000040A5 /* XCRemoteSwiftPackageReference "FocusEntity" */;
+			productName = FocusEntity;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

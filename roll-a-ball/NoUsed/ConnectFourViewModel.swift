@@ -7,10 +7,22 @@
 
 import SwiftUI
 import MultipeerConnectivity
+import UIKit
+
+class KudamanViewController:MCBrowserViewController,MCBrowserViewControllerDelegate{
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        print("risssaaaa and bend")
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        
+    }
+    
+}
 
 class ConnnectFourViewModel: NSObject, ObservableObject {
     
-    let connectFourServiceType = "gt-conn4"
+    let connectFourServiceType = "multi-labirynth"
     var isConnected : Bool = false
     var isHosting : Bool = false
     
@@ -20,6 +32,7 @@ class ConnnectFourViewModel: NSObject, ObservableObject {
     var peerId: MCPeerID
     var session: MCSession
     var nearbyServiceAdvertiser: MCNearbyServiceAdvertiser?
+    var connectedPeers:[Int] = []
     
     override init() {
         peerId = MCPeerID(displayName: UIDevice.current.name)
@@ -30,18 +43,33 @@ class ConnnectFourViewModel: NSObject, ObservableObject {
     
     func host() {
         isHosting = true
-        
+        self.counterPlayer = 1
         nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerId, discoveryInfo: nil, serviceType: connectFourServiceType)
         nearbyServiceAdvertiser?.delegate = self
         nearbyServiceAdvertiser?.startAdvertisingPeer()
-        
-        
+    }
+    func cancel(){
+        isHosting = false
+        self.counterPlayer = 1
+        session.disconnect()
+        nearbyServiceAdvertiser?.stopAdvertisingPeer()
     }
     
     func join() {
-        let browser = MCBrowserViewController(serviceType: connectFourServiceType, session: session)
+        self.counterPlayer = 1
+        let browser = KudamanViewController(serviceType: connectFourServiceType, session: session)
         browser.delegate = self
+        
         UIApplication.shared.windows.first?.rootViewController?.present(browser , animated: true)
+    }
+    func disjoin(){
+        isConnected = false
+        self.counterPlayer -= 1
+//        DispatchQueue.main.async {
+//            print("enggak")
+//        }
+        session.disconnect()
+        nearbyServiceAdvertiser?.stopAdvertisingPeer()
     }
     
     func play(){
@@ -62,12 +90,16 @@ extension ConnnectFourViewModel: MCSessionDelegate {
             print("\(peerId) state: connecting")
         case .connected:
             print("\(peerId) state: connected")
-            print("ada yg connect")
             DispatchQueue.main.async {
                 self.counterPlayer += 1
+                print("connected: \(self.counterPlayer)")
             }
         case .notConnected:
             print("\(peerId) state: not connected")
+            DispatchQueue.main.async {
+                self.counterPlayer -= 1
+                print("connected: \(self.counterPlayer)")
+            }
         @unknown default:
             print("\(peerId) state: unknown")
         }

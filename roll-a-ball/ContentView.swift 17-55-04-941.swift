@@ -41,40 +41,33 @@ enum ForceDirection{
     }
 }
 
-class GameController: UIViewController {
-    static var shared = GameController()
+class SapimanViewController: UIViewController {
+    static var shared = SapimanViewController()
     var arView:ARView = ARView()
     var multipeerSession: MultipeerSession?
     var sessionIDObservation:NSKeyValueObservation?
-    var tapOne : Bool = false
-    var isHost: Bool = false
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.arView = ARView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         self.arView.frame = view.bounds
-//        self.arView.backgroundColor = .blue
+//        let xx = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+//        xx.backgroundColor = .red
+//        self.view.addSubview(xx)
+        self.arView.backgroundColor = .blue
         self.view.addSubview(self.arView)
         setupARView()
-        setupMultipeerSession()
         
-        let _ = print("view did appear")
-        
-        if isHost{
-            let sceneField = try! Experience.loadField()
-            arView.scene.anchors.append(sceneField)
-            // manggil send experience dri multipeer handler
-            
-        }
+//        setupMultipeerSession()
         
         self.arView.session.delegate = self
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         self.arView.addGestureRecognizer(tapGestureRecognizer)
+        
+        
     }
-    
     func setupARView() {
         self.arView.automaticallyConfigureSession = false
         let config = ARWorldTrackingConfiguration()
@@ -92,26 +85,36 @@ class GameController: UIViewController {
             guard let multipeerSession = self.multipeerSession else { return }
             self.sendARSessionIDTo(peers:multipeerSession.connectedPeers)
         }
-        multipeerSession = MultipeerSession(serviceName: "multi-labir", receivedDataHandler: self.receivedData, peerJoinedHandler: self.peerJoined, peerLeftHandler: self.peerLeft, peerDiscoveredHandler: self.peerDiscovered)
+        multipeerSession = MultipeerSession(serviceName: "multiuser-ar", receivedDataHandler: self.receivedData, peerJoinedHandler: self.peerJoined, peerLeftHandler: self.peerLeft, peerDiscoveredHandler: self.peerDiscovered)
     }
     
     @objc func handleTap(recognizer:UITapGestureRecognizer) {
         
-        let anchor = ARAnchor(name:"Ball",transform: self.arView.cameraTransform.matrix)
+        let anchor = ARAnchor(name:"LaaserBlue",transform: self.arView.cameraTransform.matrix)
         self.arView.session.add(anchor:anchor)
     }
     
     func placeObject(named entityName : String, for anchor: ARAnchor){
-        if !tapOne{
-            tapOne = true
+//        @EnvironmentObject var conn4VM: ConnnectFourViewModel
+//        if conn4VM.isHosting{
+            let sceneField = try! Experience.loadField()
+            arView.scene.anchors.append(sceneField)
             if let rollABall = try? Experience.loadRollABall(){
-                setupComponents(in: rollABall)
+//                setupComponents(in: rollABall)
                 arView.scene.anchors.append(rollABall)
             }
-        }
+//        }
+//        if conn4VM.isConnected{
+//            if let rollABall = try? Experience.loadRollABall(){
+//                setupComponents(in: rollABall)
+//                arView.scene.anchors.append(rollABall)
+//            }
+//        }
+//        return arView
     }
     
     func startApplyingForce(direction:ForceDirection){
+        //        print("apply Force: \(direction.symbol)")
         if let ball = self.arView.scene.performQuery(BallComponent.query).map({ $0 }).first {
             var ballState = ball.components[BallComponent.self] as? BallComponent
             ballState?.direction = direction
@@ -119,29 +122,40 @@ class GameController: UIViewController {
         }
     }
     func stopApplyingForce(){
+        //        print("stop Force")
         if let ball = self.arView.scene.performQuery(BallComponent.query).map({ $0 }).first {
             var ballState = ball.components[BallComponent.self] as? BallComponent
             ballState?.direction = nil
             ball.components[BallComponent.self] = ballState
         }
     }
-    private func setupComponents(in rollABall : Experience.RollABall){
-        if let ball = rollABall.ball {
-            ball.components[BallComponent.self] = BallComponent()
-        }
-    }
 }
 
-extension GameController: ARSessionDelegate {
+extension SapimanViewController: ARSessionDelegate {
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         for anchor in anchors {
-            if let anchorName = anchor.name, anchorName == "Ball" {
+            if let anchorName = anchor.name, anchorName == "LaserBlue" {
                 placeObject(named:anchorName,for: anchor)
+            }
+            
+            if let participantAnchor = anchor as? ARParticipantAnchor {
+                print("Successfully connected with antoher user!")
+                
+                let anchorEntity = AnchorEntity(anchor:participantAnchor)
+                
+                let mesh = MeshResource.generateSphere(radius: 0.03)
+                let color = UIColor.red
+                let material = SimpleMaterial(color:color,isMetallic:false )
+                let coloredSphere = ModelEntity(mesh:mesh,materials:[material])
+                
+                anchorEntity.addChild(coloredSphere)
+                
+                self.arView.scene.addAnchor(anchorEntity)
             }
         }
     }
 }
-extension GameController{
+extension SapimanViewController{
     private func sendARSessionIDTo(peers: [PeerID]){
         guard let multipeerSession = multipeerSession else { return }
         let idString = self.arView.session.identifier.uuidString
@@ -218,188 +232,187 @@ extension GameController{
 
 
 struct ContentView : View {
-    @EnvironmentObject var rpsSession: MultipeerConn
-    var isHost : Bool
+
 //    private let arView = ARGameView()
     var body: some View {
         ZStack{
-            LabyrinView(rpsSession: rpsSession)
+            CisCable()
 //            ARViewContainer(arView: arView).edgesIgnoringSafeArea(.all)
-            ControlsView(startApplyingForce: GameController.shared.startApplyingForce(direction:), stopApplyingForce: GameController.shared.stopApplyingForce)
-        }
-        .onAppear{
-            GameController.shared.isHost = isHost
+            ControlsView(startApplyingForce: SapimanViewController.shared.startApplyingForce(direction:), stopApplyingForce: SapimanViewController.shared.stopApplyingForce)
         }
         .navigationBarBackButtonHidden(true)
     }
 }
 
-struct LabyrinView:UIViewControllerRepresentable{
-    @ObservedObject var rpsSession: MultipeerConn
-    func makeUIViewController(context: Context) -> GameController {
-        return GameController.shared
+struct CisCable:UIViewControllerRepresentable{
+    func makeUIViewController(context: Context) -> SapimanViewController {
+        return SapimanViewController.shared
     }
     
-    func updateUIViewController(_ uiViewController: GameController, context: Context) {
+    func updateUIViewController(_ uiViewController: SapimanViewController, context: Context) {
         
     }
     
+//    typealias UIViewControllerType = SapimanViewController
+    
+    
+
+    
+    
 }
 
-//struct ARViewContainer: UIViewRepresentable {
-//    @EnvironmentObject var conn4VM: ConnnectFourViewModel
+struct ARViewContainer: UIViewRepresentable {
+    @EnvironmentObject var conn4VM: ConnnectFourViewModel
+    
+    @State var multipeerSession: MultipeerSession?
+    @State var sessionIDObservation:NSKeyValueObservation?
+    let arView: ARGameView
+    
+    func makeUIView(context: Context) -> ARGameView {
+        setupARView()
+//        setupMultipeerSession()
+        if conn4VM.isHosting{
+            let sceneField = try! Experience.loadField()
+            arView.scene.anchors.append(sceneField)
+            if let rollABall = try? Experience.loadRollABall(){
+                setupComponents(in: rollABall)
+                arView.scene.anchors.append(rollABall)
+            }
+        }
+        if conn4VM.isConnected{
+            if let rollABall = try? Experience.loadRollABall(){
+                setupComponents(in: rollABall)
+                arView.scene.anchors.append(rollABall)
+            }
+        }
+        return arView
+        
+    }
+    
+    func setupARView() {
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.horizontal,.vertical]
+        config.environmentTexturing = .automatic
+        
+        config.isCollaborationEnabled = true
+        
+        arView.session.run(config)
+    }
+//    func setupMultipeerSession(){
 //
-//    @State var multipeerSession: MultipeerSession?
-//    @State var sessionIDObservation:NSKeyValueObservation?
-//    let arView: ARGameView
+//        sessionIDObservation = observe(\.arView.session.identifier, options: [.new]){
+//            object , change in print("SessionID Changed To: \(change.newValue!)")
+//            guard let multipeerSession = self.multipeerSession else { return }
+//            self.sendARSessionIDTo(peers:multipeerSession.connectedPeers)
+//        }
+//        multipeerSession = MultipeerSession(serviceName: "multiuser-ar", receivedDataHandler: self.receivedData, peerJoinedHandler: self.peerJoined, peerLeftHandler: self.peerLeft, peerDiscoveredHandler: self.peerDiscovered)
 //
-//    func makeUIView(context: Context) -> ARGameView {
-//        setupARView()
-////        setupMultipeerSession()
-//        if conn4VM.isHosting{
-//            let sceneField = try! Experience.loadField()
-//            arView.scene.anchors.append(sceneField)
-//            if let rollABall = try? Experience.loadRollABall(){
-//                setupComponents(in: rollABall)
-//                arView.scene.anchors.append(rollABall)
-//            }
-//        }
-//        if conn4VM.isConnected{
-//            if let rollABall = try? Experience.loadRollABall(){
-//                setupComponents(in: rollABall)
-//                arView.scene.anchors.append(rollABall)
-//            }
-//        }
-//        return arView
 //
 //    }
-//
-//    func setupARView() {
-//        let config = ARWorldTrackingConfiguration()
-//        config.planeDetection = [.horizontal,.vertical]
-//        config.environmentTexturing = .automatic
-//
-//        config.isCollaborationEnabled = true
-//
-//        arView.session.run(config)
-//    }
-////    func setupMultipeerSession(){
-////
-////        sessionIDObservation = observe(\.arView.session.identifier, options: [.new]){
-////            object , change in print("SessionID Changed To: \(change.newValue!)")
-////            guard let multipeerSession = self.multipeerSession else { return }
-////            self.sendARSessionIDTo(peers:multipeerSession.connectedPeers)
-////        }
-////        multipeerSession = MultipeerSession(serviceName: "multiuser-ar", receivedDataHandler: self.receivedData, peerJoinedHandler: self.peerJoined, peerLeftHandler: self.peerLeft, peerDiscoveredHandler: self.peerDiscovered)
-////
-////
-////    }
-//
-//    func updateUIView(_ uiView: ARGameView, context: Context) {}
-//    private func setupComponents(in rollABall : Experience.RollABall){
-//        if let ball = rollABall.ball {
-//            ball.components[BallComponent.self] = BallComponent()
-//        }
-//    }
-//}
-//extension ARViewContainer{
-//    private func sendARSessionIDTo(peers: [PeerID]){
-//        guard let multipeerSession = multipeerSession else { return }
-//        let idString = arView.session.identifier.uuidString
-//        let command = "SessionID:" + idString
-//        if let commandData = command.data(using: .utf8){
-//            multipeerSession.sendToPeers(commandData,reliably:true,peers:peers)
-//        }
-//    }
-//    func receivedData(_ data: Data, from peer: PeerID){
-//        guard let multipeerSession = multipeerSession else { return }
-//
-//        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data){
-//            arView.session.update(with:collaborationData)
-//            return
-//        }
-//        let sessionIDCommandString = "SessionID:"
-//        if let commandString = String(data:data,encoding:.utf8), commandString.starts(with: sessionIDCommandString){
-//            let newSessionID = String(commandString[commandString.index(commandString.startIndex,offsetBy: sessionIDCommandString.count)...])
-//            if let oldSessionID = multipeerSession.peerSessionIDs[peer]{
-//                removeAllAnchorsOriginatingFromARSessionWithID(oldSessionID)
-//            }
-//            multipeerSession.peerSessionIDs[peer] = newSessionID
-//        }
-//    }
-//    func peerDiscovered(_ peer:PeerID) -> Bool{
-//        guard let multipeerSession = multipeerSession else { return false }
-//        if multipeerSession.connectedPeers.count > 4 {
-//            print("A fifth player wants to join.\nThe game is currentlylimited to four players")
-//            return false
-//        }
-//        else {
-//            return true
-//        }
-//    }
-//    func peerJoined(_ peer:PeerID){
-//        print("*** A player wants to join the game. Hold the device next to each other. ***")
-//
-//        sendARSessionIDTo(peers: [peer])
-//    }
-//    func peerLeft(_ peer:PeerID){
-//        guard let multipeerSession = multipeerSession else { return }
-//        print("*** A player has left the game")
-//
-//        if let sessionID = multipeerSession.peerSessionIDs[peer] {
-//            removeAllAnchorsOriginatingFromARSessionWithID(sessionID)
-//            multipeerSession.peerSessionIDs.removeValue(forKey: peer)
-//        }
-//    }
-//    private func removeAllAnchorsOriginatingFromARSessionWithID(_ identifier : String){
-//        guard let frame = arView.session.currentFrame else { return }
-//        for anchor in frame.anchors {
-//            guard let anchorSessionID = anchor.sessionIdentifier else { continue }
-//            if anchorSessionID.uuidString == identifier {
-//                arView.session.remove(anchor: anchor)
-//            }
-//        }
-//    }
-//    func session(_ session: ARSession, didOutputCollaborationData data:ARSession.CollaborationData) {
-//        guard let multipeerSession = multipeerSession else { return }
-//        if !multipeerSession.connectedPeers.isEmpty{
-//            guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
-//            else {
-//                fatalError("Unexpected failed to encode collaboration data.")
-//            }
-//            let dataIsCritical = data.priority == .critical
-//            multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
-//        }
-//        else {
-//            print("Deferred sending collaboration to later because there are no peers.")
-//        }
-//    }
-//}
+    
+    func updateUIView(_ uiView: ARGameView, context: Context) {}
+    private func setupComponents(in rollABall : Experience.RollABall){
+        if let ball = rollABall.ball {
+            ball.components[BallComponent.self] = BallComponent()
+        }
+    }
+}
+extension ARViewContainer{
+    private func sendARSessionIDTo(peers: [PeerID]){
+        guard let multipeerSession = multipeerSession else { return }
+        let idString = arView.session.identifier.uuidString
+        let command = "SessionID:" + idString
+        if let commandData = command.data(using: .utf8){
+            multipeerSession.sendToPeers(commandData,reliably:true,peers:peers)
+        }
+    }
+    func receivedData(_ data: Data, from peer: PeerID){
+        guard let multipeerSession = multipeerSession else { return }
+        
+        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data){
+            arView.session.update(with:collaborationData)
+            return
+        }
+        let sessionIDCommandString = "SessionID:"
+        if let commandString = String(data:data,encoding:.utf8), commandString.starts(with: sessionIDCommandString){
+            let newSessionID = String(commandString[commandString.index(commandString.startIndex,offsetBy: sessionIDCommandString.count)...])
+            if let oldSessionID = multipeerSession.peerSessionIDs[peer]{
+                removeAllAnchorsOriginatingFromARSessionWithID(oldSessionID)
+            }
+            multipeerSession.peerSessionIDs[peer] = newSessionID
+        }
+    }
+    func peerDiscovered(_ peer:PeerID) -> Bool{
+        guard let multipeerSession = multipeerSession else { return false }
+        if multipeerSession.connectedPeers.count > 4 {
+            print("A fifth player wants to join.\nThe game is currentlylimited to four players")
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    func peerJoined(_ peer:PeerID){
+        print("*** A player wants to join the game. Hold the device next to each other. ***")
+        
+        sendARSessionIDTo(peers: [peer])
+    }
+    func peerLeft(_ peer:PeerID){
+        guard let multipeerSession = multipeerSession else { return }
+        print("*** A player has left the game")
+        
+        if let sessionID = multipeerSession.peerSessionIDs[peer] {
+            removeAllAnchorsOriginatingFromARSessionWithID(sessionID)
+            multipeerSession.peerSessionIDs.removeValue(forKey: peer)
+        }
+    }
+    private func removeAllAnchorsOriginatingFromARSessionWithID(_ identifier : String){
+        guard let frame = arView.session.currentFrame else { return }
+        for anchor in frame.anchors {
+            guard let anchorSessionID = anchor.sessionIdentifier else { continue }
+            if anchorSessionID.uuidString == identifier {
+                arView.session.remove(anchor: anchor)
+            }
+        }
+    }
+    func session(_ session: ARSession, didOutputCollaborationData data:ARSession.CollaborationData) {
+        guard let multipeerSession = multipeerSession else { return }
+        if !multipeerSession.connectedPeers.isEmpty{
+            guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
+            else {
+                fatalError("Unexpected failed to encode collaboration data.")
+            }
+            let dataIsCritical = data.priority == .critical
+            multipeerSession.sendToAllPeers(encodedData, reliably: dataIsCritical)
+        }
+        else {
+            print("Deferred sending collaboration to later because there are no peers.")
+        }
+    }
+}
 
 struct BallComponent: Component {
     static let query = EntityQuery(where: .has(BallComponent.self))
     var direction: ForceDirection?
 }
-
-//class ARGameView: ARView{
-//    func startApplyingForce(direction:ForceDirection){
-//        //        print("apply Force: \(direction.symbol)")
-//        if let ball = scene.performQuery(BallComponent.query).map({ $0 }).first {
-//            var ballState = ball.components[BallComponent.self] as? BallComponent
-//            ballState?.direction = direction
-//            ball.components[BallComponent.self] = ballState
-//        }
-//    }
-//    func stopApplyingForce(){
-//        //        print("stop Force")
-//        if let ball = scene.performQuery(BallComponent.query).map({ $0 }).first {
-//            var ballState = ball.components[BallComponent.self] as? BallComponent
-//            ballState?.direction = nil
-//            ball.components[BallComponent.self] = ballState
-//        }
-//    }
-//}
-
+class ARGameView: ARView{
+    func startApplyingForce(direction:ForceDirection){
+        //        print("apply Force: \(direction.symbol)")
+        if let ball = scene.performQuery(BallComponent.query).map({ $0 }).first {
+            var ballState = ball.components[BallComponent.self] as? BallComponent
+            ballState?.direction = direction
+            ball.components[BallComponent.self] = ballState
+        }
+    }
+    func stopApplyingForce(){
+        //        print("stop Force")
+        if let ball = scene.performQuery(BallComponent.query).map({ $0 }).first {
+            var ballState = ball.components[BallComponent.self] as? BallComponent
+            ballState?.direction = nil
+            ball.components[BallComponent.self] = ballState
+        }
+    }
+}
 class BallPhysicsSystem: System {
     let ballSpeed: Float = 0.05
     
@@ -470,9 +483,9 @@ extension Sequence {
     }
 }
 #if DEBUG
-//struct ContentView_Previews : PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
+struct ContentView_Previews : PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
 #endif

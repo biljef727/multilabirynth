@@ -4,8 +4,8 @@
 <dict>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_gt-conn4._tcp</string>
-		<string>_gt-conn4._udp</string>
+		<string>_multi-labir._tcp</string>
+		<string>_multi-labir._udp</string>
 	</array>
 </dict>
 </plist>
