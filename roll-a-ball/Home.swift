@@ -11,7 +11,7 @@ import ARKit
 import os.log
 
 struct HomeView: View {
-    @StateObject var rpsSession: MultipeerConn
+    @StateObject var rpsSession: MultipeerConn = MultipeerConn(username: "")
     var body: some View {
         NavigationStack{
             VStack{

@@ -11,7 +11,7 @@ import ARKit
 import os.log
 
 struct PeerRoom: View {
-    @StateObject var rpsSession: MultipeerConn
+    @ObservedObject var rpsSession: MultipeerConn
     var logger = Logger()
     var body: some View {
         ZStack{
@@ -45,15 +45,17 @@ struct PeerRoom: View {
                 }
                 Spacer()
                 //hanya hoster yg bisa start
-                NavigationLink{
-                    ContentView(isHost:rpsSession.Hoster).environmentObject(rpsSession)
-                } label: {
-                    Text("Play")
+                if (rpsSession.Hoster && rpsSession.paired){
+                    NavigationLink{
+                        ContentView(isHost:rpsSession.Hoster).environmentObject(rpsSession)
+                    } label: {
+                        Text("Play")
+                    }
+                    .simultaneousGesture(TapGesture().onEnded{
+                        rpsSession.play()
+                    })
+                    .disabled(rpsSession.paired ? false : true)
                 }
-                .simultaneousGesture(TapGesture().onEnded{
-                    rpsSession.play()
-                })
-                .disabled(rpsSession.paired ? false : true)
             }
             VStack{
                 HStack{

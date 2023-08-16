@@ -10,7 +10,14 @@ import MultipeerConnectivity
 import SwiftUI
 import ARKit
 import os.log
+import RealityKit
 
+struct ARData{
+    var isHost: Bool?
+    var connectedDeviceName: String?
+    var tableAdded = false
+    var tableAddedInGuestDevice = false
+}
 class MultipeerConn: NSObject, ObservableObject{
     @Environment(\.dismiss) private var dismiss
     @Published var availablePeers: [MCPeerID] = []
@@ -30,6 +37,8 @@ class MultipeerConn: NSObject, ObservableObject{
     public let session: MCSession
     public let serviceAdvertiser: MCNearbyServiceAdvertiser
     public let serviceBrowser: MCNearbyServiceBrowser
+    
+    var arView:ARView?
     
     var log = Logger()
     init(username: String) {
@@ -57,6 +66,7 @@ class MultipeerConn: NSObject, ObservableObject{
     func disconnect(){
         serviceAdvertiser.stopAdvertisingPeer()
         serviceBrowser.stopBrowsingForPeers()
+        Hoster = false
         dismiss()
         session.disconnect()
     }
@@ -70,37 +80,35 @@ class MultipeerConn: NSObject, ObservableObject{
         }
     }
     
-    func send(move: Move) {
-        if !session.connectedPeers.isEmpty {
-            log.info("sendMove: \(String(describing: move)) to \(self.session.connectedPeers[0].displayName)")
-            do {
-                try session.send(move.rawValue.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
-            } catch {
-                log.error("Error sending: \(String(describing: error))")
-            }
-        }
-    }
+    //    func send(move: Move) {
+    //        if !session.connectedPeers.isEmpty {
+    //            log.info("sendMove: \(String(describing: move)) to \(self.session.connectedPeers[0].displayName)")
+    //            do {
+    //                try session.send(move.rawValue.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+    //            } catch {
+    //                log.error("Error sending: \(String(describing: error))")
+    //            }
+    //        }
+    //    }
     
-    func sendExperience(data: ARSession.CollaborationData) {
+    func sendExperience(data: Any) {
         if !session.connectedPeers.isEmpty {
             do {
                 guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: true)
                 else {
                     fatalError("Unexpected failed to encode collaboration data.")
                 }
-                let dataIsCritical = data.priority == .critical
-                
                 try session.send(encodedData, toPeers: session.connectedPeers, with: .reliable)
+                
             } catch {
                 log.error("Error sending: \(String(describing: error))")
             }
         }
     }
 }
-    
+
 enum Move: String, CaseIterable, CustomStringConvertible {
     case rock, paper, scissors, unknown
-
     var description : String {
         switch self {
         case .rock: return "Rock"

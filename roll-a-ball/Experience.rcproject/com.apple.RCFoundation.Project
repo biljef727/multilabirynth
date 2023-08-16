@@ -276,6 +276,13 @@
                           }
                         ],
                         [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "WallLeft"
+                          }
+                        ],
+                        [
                           "rigidBody-enabled",
                           {
                             "typeName" : "Bool",
@@ -312,7 +319,7 @@
                           "bevelRadius",
                           {
                             "typeName" : "Double",
-                            "value" : 0.040000000000000008
+                            "value" : 0.040000000000000022
                           }
                         ],
                         [
@@ -326,7 +333,7 @@
                           "height",
                           {
                             "typeName" : "Double",
-                            "value" : 0.0019999999999999879
+                            "value" : 0.0019999999999999892
                           }
                         ],
                         [
@@ -420,7 +427,7 @@
                           "bevelRadius",
                           {
                             "typeName" : "Double",
-                            "value" : 0.040000000000000008
+                            "value" : 0.040000000000000022
                           }
                         ],
                         [
@@ -469,6 +476,13 @@
                           {
                             "typeName" : "UUID",
                             "value" : "0FE1B3A9-5D37-4239-B8C7-6C900127F9B5"
+                          }
+                        ],
+                        [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "WallRight"
                           }
                         ],
                         [
@@ -577,6 +591,13 @@
                           }
                         ],
                         [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "WallTop"
+                          }
+                        ],
+                        [
                           "rigidBody-enabled",
                           {
                             "typeName" : "Bool",
@@ -674,6 +695,13 @@
                           {
                             "typeName" : "UUID",
                             "value" : "E35E5BC1-C9EB-4AEF-A5A4-EFBA60F87AB0"
+                          }
+                        ],
+                        [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "WallBottom"
                           }
                         ],
                         [

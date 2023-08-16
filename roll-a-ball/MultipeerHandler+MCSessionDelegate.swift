@@ -48,7 +48,8 @@ extension MultipeerConn: MCSessionDelegate {
             startGame = true
         }
         if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self, from: data){
-//            arView.session.update(with:collaborationData)
+            arView?.session.update(with:collaborationData)
+            print("Sampe sini")
 //            return
         }
     }

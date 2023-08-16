@@ -21,9 +21,12 @@
 		2125E6442A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6432A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift */; };
 		2125E6462A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6452A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift */; };
 		2125E6482A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6472A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift */; };
-		2125E64A2A84DF20000040A5 /* PairView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6492A84DF20000040A5 /* PairView.swift */; };
-		2125E64C2A84DF63000040A5 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E64B2A84DF63000040A5 /* GameView.swift */; };
 		2125E64F2A84F056000040A5 /* PeerRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E64E2A84F056000040A5 /* PeerRoom.swift */; };
+		2125E6532A8A1D16000040A5 /* ContentStoryBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6522A8A1D16000040A5 /* ContentStoryBoard.swift */; };
+		2125E6552A8B6953000040A5 /* ARTablePass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6542A8B6953000040A5 /* ARTablePass.swift */; };
+		2125E6572A8B6A1A000040A5 /* ARTablePassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6562A8B6A1A000040A5 /* ARTablePassController.swift */; };
+		2125E6592A8B6A32000040A5 /* ARTablePassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E6582A8B6A32000040A5 /* ARTablePassModel.swift */; };
+		2125E65B2A8B6AF8000040A5 /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2125E65A2A8B6AF8000040A5 /* HapticsManager.swift */; };
 		218FEB612A80D2A600D078FA /* HostRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 218FEB602A80D2A600D078FA /* HostRoom.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,9 +44,12 @@
 		2125E6432A84DBD6000040A5 /* MultipeerHandler+MCSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MultipeerHandler+MCSessionDelegate.swift"; sourceTree = "<group>"; };
 		2125E6452A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift; sourceTree = "<group>"; };
 		2125E6472A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipeerHandlerMCNearbyServiceHandlerDelegate.swift; sourceTree = "<group>"; };
-		2125E6492A84DF20000040A5 /* PairView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairView.swift; sourceTree = "<group>"; };
-		2125E64B2A84DF63000040A5 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		2125E64E2A84F056000040A5 /* PeerRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerRoom.swift; sourceTree = "<group>"; };
+		2125E6522A8A1D16000040A5 /* ContentStoryBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStoryBoard.swift; sourceTree = "<group>"; };
+		2125E6542A8B6953000040A5 /* ARTablePass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTablePass.swift; sourceTree = "<group>"; };
+		2125E6562A8B6A1A000040A5 /* ARTablePassController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTablePassController.swift; sourceTree = "<group>"; };
+		2125E6582A8B6A32000040A5 /* ARTablePassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARTablePassModel.swift; sourceTree = "<group>"; };
+		2125E65A2A8B6AF8000040A5 /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		218FEB602A80D2A600D078FA /* HostRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRoom.swift; sourceTree = "<group>"; };
 		218FEB622A80F2B400D078FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,7 +94,12 @@
 				2125E6472A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift */,
 				21185D962A7CEFAD005840DA /* Home.swift */,
 				2125E64E2A84F056000040A5 /* PeerRoom.swift */,
+				2125E6522A8A1D16000040A5 /* ContentStoryBoard.swift */,
 				21185D7A2A77A7E8005840DA /* ContentView.swift */,
+				2125E6542A8B6953000040A5 /* ARTablePass.swift */,
+				2125E6562A8B6A1A000040A5 /* ARTablePassController.swift */,
+				2125E6582A8B6A32000040A5 /* ARTablePassModel.swift */,
+				2125E65A2A8B6AF8000040A5 /* HapticsManager.swift */,
 				2125E64D2A84E4D0000040A5 /* NoUsed */,
 				2125E63C2A84C96B000040A5 /* Ball.reality */,
 				2125E6372A83A9ED000040A5 /* Experience.rcproject */,
@@ -111,8 +122,6 @@
 			children = (
 				218FEB602A80D2A600D078FA /* HostRoom.swift */,
 				21185D942A7CE994005840DA /* ConnectFourViewModel.swift */,
-				2125E6492A84DF20000040A5 /* PairView.swift */,
-				2125E64B2A84DF63000040A5 /* GameView.swift */,
 			);
 			path = NoUsed;
 			sourceTree = "<group>";
@@ -202,13 +211,16 @@
 				2125E6382A83A9ED000040A5 /* Experience.rcproject in Sources */,
 				2125E64F2A84F056000040A5 /* PeerRoom.swift in Sources */,
 				21185D792A77A7E8005840DA /* AppDelegate.swift in Sources */,
+				2125E65B2A8B6AF8000040A5 /* HapticsManager.swift in Sources */,
+				2125E6532A8A1D16000040A5 /* ContentStoryBoard.swift in Sources */,
 				2125E6462A84DC73000040A5 /* MultipeerHandlerMcNearbyServiceAdvertiserDelegate.swift in Sources */,
-				2125E64A2A84DF20000040A5 /* PairView.swift in Sources */,
 				21185D952A7CE994005840DA /* ConnectFourViewModel.swift in Sources */,
 				2125E6482A84DCC2000040A5 /* MultipeerHandlerMCNearbyServiceHandlerDelegate.swift in Sources */,
+				2125E6572A8B6A1A000040A5 /* ARTablePassController.swift in Sources */,
+				2125E6592A8B6A32000040A5 /* ARTablePassModel.swift in Sources */,
 				2125E6422A84D7F4000040A5 /* MultipeerHandler.swift in Sources */,
-				2125E64C2A84DF63000040A5 /* GameView.swift in Sources */,
 				21185D972A7CEFAD005840DA /* Home.swift in Sources */,
+				2125E6552A8B6953000040A5 /* ARTablePass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
